@@ -1,1 +1,4 @@
 *.pyc
+
+# VIM temp files
+*.sw*
