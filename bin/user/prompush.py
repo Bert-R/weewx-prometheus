@@ -162,36 +162,55 @@ weather_metrics = {
         {'name':    'weewx_loop_leaf_wet_4',                      'type': 'gauge'},
     'txBatteryStatus':
         {'name':    'weewx_loop_tx_battery_status',               'type': 'gauge'},
-	'clockUnsynchronized':
-		{'name':     'weewx_loop_clock_unsynchronized',           'type': 'gauge'},
-	'extraHumid1':
-		{'name':     'weewx_loop_extra_humid_1',                  'type': 'gauge'},
-	'heatindex1':
-		{'name':     'weewx_loop_heatindex_1',                    'type': 'gauge'},
-	'hourRain':
-		{'name':     'weewx_loop_hour_rain',                      'type': 'gauge'},
-	'inHeatindex':
-		{'name':     'weewx_loop_in_heatindex',                   'type': 'gauge'},
-	'outTempBatteryStatus':
-		{'name':     'weewx_loop_out_temp_battery_status',        'type': 'gauge'},
-	'outTempFault':
-		{'name':     'weewx_loop_out_temp_fault',                 'type': 'gauge'},
-	'rain24':
-		{'name':     'weewx_loop_rain_24',                        'type': 'gauge'},
-	'rainBatteryStatus':
-		{'name':     'weewx_loop_rain_battery_status',            'type': 'gauge'},
-	'rainFault':
-		{'name':     'weewx_loop_rain_fault',                     'type': 'gauge'},
-	'rainTotal':
-		{'name':     'weewx_loop_rain_total',                     'type': 'gauge'},
-	'uvBatteryStatus':
-		{'name':     'weewx_loop_uv_battery_status',              'type': 'gauge'},
-	'uvFault':
-		{'name':     'weewx_loop_uv_fault',                       'type': 'gauge'},
-	'windBatteryStatus':
-		{'name':     'weewx_loop_wind_battery_status',            'type': 'gauge'},
-	'windFault':
-		{'name':     'weewx_loop_wind_fault',                     'type': 'gauge'}
+    'clockUnsynchronized':
+        {'name':    'weewx_loop_clock_unsynchronized',            'type': 'gauge'},
+    'extraHumid1':
+        {'name':    'weewx_loop_extra_humid_1',                   'type': 'gauge'},
+    'heatindex1':
+        {'name':    'weewx_loop_heatindex_1',                     'type': 'gauge'},
+    'hourRain':
+        {'name':    'weewx_loop_hour_rain',                       'type': 'gauge'},
+    'inHeatindex':
+        {'name':    'weewx_loop_in_heatindex',                    'type': 'gauge'},
+    'outTempBatteryStatus':
+        {'name':    'weewx_loop_out_temp_battery_status',         'type': 'gauge'},
+    'outTempFault':
+        {'name':    'weewx_loop_out_temp_fault',                  'type': 'gauge'},
+    'rain24':
+        {'name':    'weewx_loop_rain_24',                         'type': 'gauge'},
+    'rainBatteryStatus':
+        {'name':    'weewx_loop_rain_battery_status',             'type': 'gauge'},
+    'rainFault':
+        {'name':    'weewx_loop_rain_fault',                      'type': 'gauge'},
+    'rainTotal':
+        {'name':    'weewx_loop_rain_total',                      'type': 'gauge'},
+    'uvBatteryStatus':
+        {'name':    'weewx_loop_uv_battery_status',               'type': 'gauge'},
+    'uvFault':
+        {'name':    'weewx_loop_uv_fault',                        'type': 'gauge'},
+    'windBatteryStatus':
+        {'name':    'weewx_loop_wind_battery_status',             'type': 'gauge'},
+    'windFault':
+        {'name':    'weewx_loop_wind_fault',                      'type': 'gauge'},
+    'weekRain':
+        {'name':    'weewx_loop_week_rain',                       'type': 'gauge'},
+    'wh65_batt':
+        {'name':    'weewx_loop_wh65_batt',                       'type': 'gauge'},
+    'wh65_sig':
+        {'name':    'weewx_loop_wh65_sig',                        'type': 'gauge'},
+    'daymaxwind':
+        {'name':    'weewx_loop_day_max_wind',                    'type': 'gauge'},
+    'wh31_ch1_sig':
+        {'name':    'weewx_loop_wh31_ch1_sig',                    'type': 'gauge'},
+    'wh31_ch1_batt':
+        {'name':    'weewx_loop_wh31_ch1_batt',                   'type': 'gauge'},
+    'relbarometer':
+        {'name':    'weewx_loop_rel_barometer',                   'type': 'gauge'},
+    'luminosity':
+        {'name':    'weewx_loop_luminosity',                      'type': 'gauge'},
+    'uvradiation':
+        {'name':    'weewx_loop_uvradiation',                     'type': 'gauge'}
+
 }
 
 __version__ = '1.1.0'
