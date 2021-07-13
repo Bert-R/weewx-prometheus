@@ -223,7 +223,9 @@ import requests
 
 import queue
 import sys
-import syslog
+import logging
+
+log = logging.getLogger(__name__)
 
 class PromPush(weewx.restx.StdRESTful):
     """
@@ -239,7 +241,7 @@ class PromPush(weewx.restx.StdRESTful):
             _prom_dict = weeutil.weeutil.accumulateLeaves(
                 config_dict['StdRESTful']['PromPush'], max_level=1)
         except KeyError as e:
-            logerr("config error: missing parameter %s" % e)
+            log.error("config error: missing parameter %s" % e)
             return
 
         _manager_dict = weewx.manager.get_manager_dict(
@@ -250,7 +252,7 @@ class PromPush(weewx.restx.StdRESTful):
                                           **_prom_dict)
         self.loop_thread.start()
         self.bind(weewx.NEW_LOOP_PACKET, self.new_loop_packet)
-        loginfo("data will be sent to pushgateway at %s:%s" %
+        log.info("data will be sent to pushgateway at %s:%s" %
                 (_prom_dict['host'], _prom_dict['port']))
 
     def new_loop_packet(self, event):
@@ -317,15 +319,15 @@ class PromPushThread(weewx.restx.RESTThread):
                                 headers={'Content-Type': 'application/octet-stream'})
             if 200 <= _res.status_code <= 299:
                 # success
-                # logdbg("pushgw post return code - %s" % _res.status_code)
+                # log.debug("pushgw post return code - %s" % _res.status_code)
                 return
             else:
                 # something went awry
-                logerr("pushgw post error: %s" % _res.text)
+                log.error("pushgw post error: %s" % _res.text)
                 return
 
         except requests.ConnectionError as e:
-            logerr("pushgw post error: %s" % e.message)
+            log.error("pushgw post error: %s" % e.args)
 
 
     def process_record(self, record, dbm):
@@ -334,7 +336,7 @@ class PromPushThread(weewx.restx.RESTThread):
         record_data = ''
 
         if self.skip_post:
-            loginfo("-- prompush: skipping post")
+            log.info("-- prompush: skipping post")
         else:
             for key, val in record.items():
                 if val is None:
@@ -349,21 +351,6 @@ class PromPushThread(weewx.restx.RESTThread):
                     record_data += "%s %s\n" % (str(weather_metrics[key]['name']), str(val))
                 else:
                     if key != 'type':
-                        loginfo("missing field [%s] in defs" % (key))
+                        log.info("missing field [%s] in defs" % (key))
 
         self.post_metrics(record_data)
-
-
-#---------------------------------------------------------------------
-# misc. logging functions
-def logmsg(level, msg):
-    syslog.syslog(level, 'prom-push: %s' % msg)
-
-def logdbg(msg):
-    logmsg(syslog.LOG_DEBUG, msg)
-
-def loginfo(msg):
-    logmsg(syslog.LOG_INFO, msg)
-
-def logerr(msg):
-    logmsg(syslog.LOG_ERR, msg)
