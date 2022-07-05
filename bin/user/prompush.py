@@ -92,7 +92,7 @@ weather_metrics = {
         {'name':    'weewx_loop_day_evap_transipration',          'type': 'gauge'},
     'yearET':
         {'name':    'weewx_loop_year_evap_transipration',         'type': 'gauge'},
-    'consBatteryVoltage':   
+    'consBatteryVoltage':
         {'name':    'weewx_loop_console_battery_volts',           'type': 'gauge'},
     'rain':
         {'name':    'weewx_loop_rain_in',                         'type': 'gauge'},
@@ -330,6 +330,14 @@ class PromPushThread(weewx.restx.RESTThread):
             log.error("pushgw post error: %s" % e.args)
 
 
+    def build_record_data(self, metric_name, metric_type, val):
+        # annotate the submission with the appropriate metric type.
+        # if there's no metric type supplied the pushgw will
+        # annotate with 'untyped'
+        record_data = "# TYPE %s %s\n" % (metric_name, metric_type)
+        record_data += "%s %s\n" % (metric_name, val)
+        return record_data
+
     def process_record(self, record, dbm):
         _ = dbm
 
@@ -343,14 +351,13 @@ class PromPushThread(weewx.restx.RESTThread):
                     val = 0.0
 
                 if weather_metrics.get(key):
-                    # annotate the submission with the appropriate metric type.
-                    # if there's no metric type supplied the pushgw will
-                    # annotate with 'untyped'
-#                    record_data += "# TYPE %s %s\n" % (str(weather_metrics[key]['name']), str(weather_metrics[key]['type']))
-                    record_data += "# TYPE %s %s\n" % (str(weather_metrics[key]['name']), str(weather_metrics[key]['type']))
-                    record_data += "%s %s\n" % (str(weather_metrics[key]['name']), str(val))
+                    record_data += self.build_record_data(str(weather_metrics[key]['name']), str(weather_metrics[key]['type']), str(val))
                 else:
                     if key != 'type':
                         log.info("missing field [%s] in defs" % (key))
+
+            # Publish rain total if not done already, by publishing day rain as counter
+            if 'dayRain' in record and 'rainTotal' not in record:
+                record_data += self.build_record_data('weewx_loop_rain_total', 'counter', str(record['dayRain']))
 
         self.post_metrics(record_data)
