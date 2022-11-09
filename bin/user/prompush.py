@@ -15,11 +15,11 @@ inTemp       63.0012950398       gauge
 barometer    31.0999352459       gauge
 windchill    32.4567414016
 dewpoint     26.9867627099       gauge
-windrun      1.20018113179e-05
+windrun      1.20018113179e-05   gauge
 rain         0.0                 gauge
 humidex      32.4567414016       gauge
 pressure     31.0999352459       gauge
-ET           0.480818085118
+ET           0.480818085118      gauge
 rainRate     0.0                 gauge
 usUnits      1
 appTemp      28.2115054547       gauge
@@ -56,12 +56,14 @@ weather_metrics = {
         {'name':    'weewx_loop_windchill_degrees',               'type': 'gauge'},
     'dewpoint':
         {'name':    'weewx_loop_dewpoint_degrees',                'type': 'gauge'},
-    # 'windrun':
+    'windrun':
+        {'name':    'weewx_loop_windrun_km',                      'type': 'gauge'},
     'humidex':
         {'name':    'weewx_loop_humidex_degrees',                 'type': 'gauge'},
     'pressure':
         {'name':    'weewx_loop_pressure_in',                     'type': 'gauge'},
-    # ET':
+    'ET':
+        {'name':    'weewx_loop_et_mm',                           'type': 'gauge'},
     'rainRate':
         {'name':    'weewx_loop_rain_rate_in_per_hour',           'type': 'gauge'},
     # 'usUnits':
