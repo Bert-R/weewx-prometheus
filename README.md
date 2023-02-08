@@ -16,12 +16,12 @@ This extension can be easily installed using the weewx extensions installer.
 
 1. Download the extension from github:
 	```
-	wget https://github.com/Bert-R/weewx-prometheus/archive/v1.5.0.tar.gz
+	wget https://github.com/Bert-R/weewx-prometheus/archive/v1.6.0.tar.gz
 	```
 
 2. Install using the weewx extension utility
 	```
-	wee_extension --install v1.5.0.tar.gz
+	wee_extension --install v1.6.0.tar.gz
 	```
 
 3. Update **weewx.conf** to appropriately tag weather data for submission into the Prometheus pushgateway and subsequent scraping from Prometheus.  Note that **job** and **instance** names may be subject to relabeling depending on your Prometheus environment.
