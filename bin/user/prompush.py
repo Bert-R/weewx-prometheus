@@ -103,7 +103,7 @@ weather_metrics = {
     'monthRain':
         {'name':    'weewx_loop_monthly_rain_in',                 'type': 'gauge'},
     'yearRain':
-        {'name':    'weewx_loop_yearly_rain_in',                  'type': 'gauge'},
+        {'name':    'weewx_archive_yearly_rain_in',               'type': 'gauge'},
     'stormRain':
         {'name':    'weewx_loop_storm_rain_in',                   'type': 'gauge'},
     'dateTime':
